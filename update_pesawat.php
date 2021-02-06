@@ -24,13 +24,13 @@
         <h1>Update Data Pesawat</h1>
         <form method="POST" action="">
             Kode Pesawat : 
-            <input type="text" name="kode_pesawat" value="<?php echo $data_update['kode_pesawat'] ?> "><br>
+            <input type="text" name="kode_pesawat" value="<?php echo $data_update['kode_pesawat'] ?>"><br>
             Tahun Pembuatan :
-            <input type="text" name="tahun_pembuatan" value="<?php echo $data_update['tahun_pembuatan'] ?> "><br>
+            <input type="text" name="tahun_pembuatan" value="<?php echo $data_update['tahun_pembuatan'] ?>"><br>
             Nama Pesawat :
-            <input type="text" name="nama_pesawat" value="<?php echo $data_update['nama_pesawat'] ?> "><br>
+            <input type="text" name="nama_pesawat" value="<?php echo $data_update['nama_pesawat'] ?>"><br>
             Nama Maskapai :
-            <input type="text" name="nama_maskapai" value="<?php echo $data_update['nama_maskapai'] ?> "><br>
+            <input type="text" name="nama_maskapai" value="<?php echo $data_update['nama_maskapai'] ?>"><br>
 
             <button type="submit">Update</button>
         </form>
