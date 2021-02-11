@@ -65,10 +65,12 @@
                         echo "<td>".$row['nama']."</td>";
                         echo "<td>".$row['nomor_ktp']."</td>";
                         echo "<td>".$row['alamat']."</td>";
+                        //MENAMPILKAN JENIS KELAMIN BERDASARKAN KODE row 'jenis_kelamin'
                         if($row['jenis_kelamin']==1)
                             echo "<td>Laki-laki</td>";
                         else
                             echo "<td>Perempuan</td>";    
+                        //MERUBAH FORMAT TANGGAL DG TAMPILAN YANG BIASA DIGUNAKAN DI INDONESIA
                         echo "<td>".date('d M Y',strtotime($row['tanggal_lahir']))."</td>";
                         echo "<td><a href='update_customer.php?id=".$row['id']."'>Update</a></td>";
                         echo "<td><a href='delete_customer.php?id=".$row['id']."'>Delete</a></td>";
