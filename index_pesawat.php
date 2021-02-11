@@ -28,6 +28,7 @@
         <b>Daftar Pesawat</b>
         <a href="insert_pesawat.php">Tambah Pesawat</a>
         <a href="index.php">Daftar Bandara</a>
+        <a href="index_customer.php">Daftar Customer</a>
 
         <form action="" method="GET">
             <input type="text" name="keyword" value="<?php echo $keyword; ?>">

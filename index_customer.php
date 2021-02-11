@@ -1,6 +1,6 @@
 <html>  
     <head>
-        <title>CRUD MySQL dengan FORM</title>
+        <title>Daftar CUSTOMER</title>
         <style>
             /* MENAMPILKAN BORDER PADA TABLE */
             table,td,tr,th { border: 1px solid black}
@@ -25,10 +25,10 @@
                 $keyword = $_GET['keyword'];
             }
         ?>
-        <b>Daftar Bandara</b>
-        <a href="insert.php">Tambah</a>
+        <b>Daftar Customer</b>
+        <a href="insert_customer.php">Tambah Customer</a>
+        <a href="index.php">Daftar Bandara</a>
         <a href="index_pesawat.php">Daftar Pesawat</a>
-        <a href="index_customer.php">Daftar Customer</a>
 
         <form action="" method="GET">
             <input type="text" name="keyword" value="<?php echo $keyword; ?>">
@@ -38,39 +38,45 @@
         <table>
             <tr>
                 <td>Nomor</td>
-                <td>Kode Bandara</td>
-                <td>Bandara</td>
+                <td>Nama</td>
+                <td>Nomor KTP</td>
                 <td>Alamat</td>
+                <td>Jenis Kelamin</td>
+                <td>Tanggal Lahir</td>
                 <td>Update</td>
                 <td>Delete</td>
             </tr>
             <?php
-                $sql_bandara = "SELECT * FROM bandara";
-                if(strlen($keyword)>0){
-                    $sql_bandara = "SELECT * FROM bandara WHERE 
-                        kode_bandara LIKE '%".$keyword."%' 
-                        OR nama_bandara LIKE '%".$keyword."%' 
-                        OR alamat_bandara LIKE '%".$keyword."%'";    
+                $sql_customer = "SELECT * FROM customer";
+                if($keyword!=""){
+                    $sql_customer = "SELECT * FROM customer WHERE 
+                        nama LIKE '%".$keyword."%' OR 
+                        nomor_ktp LIKE '%".$keyword."%' OR 
+                        alamat LIKE '%".$keyword."%'";
                 }
 
-                $result_bandara = $connection->query($sql_bandara);
-                //MENGECEK APAKAH HASIL DATANYA ADA
-                if($result_bandara->num_rows>0){
+                $result_customer = $connection->query($sql_customer);
+                if($result_customer->num_rows>0){
                     $i = 1;
                     //PERULANGAN UNTUK MENGAMBIL DATA HASIL QUERY
-                    while($row = $result_bandara->fetch_assoc()){
+                    while($row = $result_customer->fetch_assoc()){
                         echo "<tr>";
                         echo "<td>".$i."</td>";
-                        echo "<td>".$row['kode_bandara']."</td>";
-                        echo "<td>".$row['nama_bandara']."</td>";
-                        echo "<td>".$row['alamat_bandara']."</td>";
-                        echo "<td><a href='update.php?id=".$row['id']."'>Update</a></td>";
-                        echo "<td><a href='delete.php?id=".$row['id']."'>Delete</a></td>";
+                        echo "<td>".$row['nama']."</td>";
+                        echo "<td>".$row['nomor_ktp']."</td>";
+                        echo "<td>".$row['alamat']."</td>";
+                        if($row['jenis_kelamin']==1)
+                            echo "<td>Laki-laki</td>";
+                        else
+                            echo "<td>Perempuan</td>";    
+                        echo "<td>".date('d M Y',strtotime($row['tanggal_lahir']))."</td>";
+                        echo "<td><a href='update_customer.php?id=".$row['id']."'>Update</a></td>";
+                        echo "<td><a href='delete_customer.php?id=".$row['id']."'>Delete</a></td>";
                         echo "</tr>";
                         $i++;
                     }
                 }else{
-                    echo "<tr><td colspan='5'>Tidak ada data yang ditampilkan</td></tr>";
+                    echo "<tr><td colspan='8'>Tidak ada data yang ditampilkan</td></tr>";
                 }
             ?>
         </table>
