@@ -46,18 +46,29 @@
             <?php echo "Pesawat:  ".$data_update['nama_pesawat'] ?><br/>
             <?php echo "Bandara Dari:  ".$data_update['bandara_asal'] ?><br/>
             <?php echo "Bandara Tujuan:  ".$data_update['bandara_tujuan'] ?><br/>
-            <?php echo "Waktu Penerbangan:  ".$data_update['waktu_penerbangan'] ?><br/>
-            <?php echo "Status Penerbangan:  ".$data_update['status_penerbangan'] ?><br/>
+            <?php echo "Waktu Penerbangan:  ".date('d M Y h:i', strtotime($data_update['waktu_penerbangan']))  ?><br/>
+            <?php
+                if($data_update['status_penerbangan']==1) 
+                    echo "Status Penerbangan:  Belum Terbang";
+                else if($data_update['status_penerbangan']==2)
+                    echo "Status Penerbangan:  Menunggu Terbang";
+                else if($data_update['status_penerbangan']==3)
+                    echo "Status Penerbangan:  Sudah Terbang";
+                else if($data_update['status_penerbangan']==2)
+                    echo "Status Penerbangan:  Sudah Sampai";
+                
+            ?><br/>
             
         <hr/>
 
-        <a href="insert_penumpang.php?id=<?php echo $row['id']; ?>">Tambah Penumpang</a>
+        <a href="insert_penumpang.php?id=<?php echo $data_update['id']; ?>">Tambah Penumpang</a>
         <table>
             <tr>
                 <td>Nomor</td>
                 <td>Nama</td>
                 <td>Alamat</td>
                 <td>Status</td>
+                <td>Aksi</td>
             </tr>
         <?php 
             $sql_penumpang = "SELECT  
@@ -85,7 +96,8 @@
                     else if($row['status_penumpang']==2)
                         echo "<td>Sudah Terbang</td>";
                     else
-                        echo "<td>Batal Terbang</td>";    
+                        echo "<td>Batal Terbang</td>";  
+                    echo "<td><a href='update_status.php?id=".$row['id']."'>Update Status</a></td>";    
                     echo "</tr>";
                     $i++;
                 }

@@ -42,6 +42,8 @@
                     '".date('Y-m-d h:i:s')."', 
                     '".date('Y-m-d h:i:s')."')";
 
+                    // print_r($sql_update_customer);die();
+
                     if($connection->query($sql_update_customer)==TRUE){
                         header('location: detail_penerbangan.php?id='.$get_id);
                     }else{
